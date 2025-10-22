@@ -51,7 +51,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun UnitConverter(modifier: Modifier = Modifier) {
     var inputValue by remember { mutableStateOf("") }
-
+    var inExpanded by remember { mutableStateOf(false) }
+    var outExpanded by remember { mutableStateOf(false) }
 
     Column(modifier = modifier.fillMaxSize().padding(0.dp, 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally)
@@ -63,11 +64,11 @@ fun UnitConverter(modifier: Modifier = Modifier) {
         Row {
             /* Input Box */
             Box {
-                Button(onClick = { }) {
+                Button(onClick = { inExpanded = true }) {
                     Text("Select")
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "ArrowDropDown")
                 }
-                DropdownMenu(expanded = false, onDismissRequest = {  }) {
+                DropdownMenu(expanded = inExpanded, onDismissRequest = { inExpanded = false }) {
                     DropdownMenuItem(text = { Text("Centimeters") }, onClick = { /*TODO*/})
                     DropdownMenuItem(text = { Text("Meters") }, onClick = { /*TODO*/})
                     DropdownMenuItem(text = { Text("Feet") }, onClick = { /*TODO*/})
@@ -77,11 +78,11 @@ fun UnitConverter(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.width(16.dp))
             /* Output Box */
             Box {
-                Button(onClick = {  }) {
+                Button(onClick = { outExpanded = true }) {
                     Text("Select")
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "ArrowDropDown")
                 }
-                DropdownMenu(expanded = false, onDismissRequest = {  }) {
+                DropdownMenu(expanded = outExpanded, onDismissRequest = { outExpanded = false }) {
                     DropdownMenuItem(text = { Text("Centimeters") }, onClick = { /*TODO*/})
                     DropdownMenuItem(text = { Text("Meters") }, onClick = { /*TODO*/})
                     DropdownMenuItem(text = { Text("Feet") }, onClick = { /*TODO*/})
