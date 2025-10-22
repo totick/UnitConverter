@@ -50,13 +50,15 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun UnitConverter(modifier: Modifier = Modifier) {
+    var inputValue by remember { mutableStateOf("") }
+
 
     Column(modifier = modifier.fillMaxSize().padding(0.dp, 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally)
     {
         Text("Unit Converter")
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(value = "", onValueChange = { }, label = { Text("Enter value")})
+        OutlinedTextField(value = inputValue, onValueChange = { inputValue = it }, label = { Text("Enter value")})
         Spacer(modifier = Modifier.height(16.dp))
         Row {
             /* Input Box */
@@ -65,7 +67,7 @@ fun UnitConverter(modifier: Modifier = Modifier) {
                     Text("Select")
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "ArrowDropDown")
                 }
-                DropdownMenu(expanded = true, onDismissRequest = {  }) {
+                DropdownMenu(expanded = false, onDismissRequest = {  }) {
                     DropdownMenuItem(text = { Text("Centimeters") }, onClick = { /*TODO*/})
                     DropdownMenuItem(text = { Text("Meters") }, onClick = { /*TODO*/})
                     DropdownMenuItem(text = { Text("Feet") }, onClick = { /*TODO*/})
@@ -79,7 +81,7 @@ fun UnitConverter(modifier: Modifier = Modifier) {
                     Text("Select")
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "ArrowDropDown")
                 }
-                DropdownMenu(expanded = true, onDismissRequest = {  }) {
+                DropdownMenu(expanded = false, onDismissRequest = {  }) {
                     DropdownMenuItem(text = { Text("Centimeters") }, onClick = { /*TODO*/})
                     DropdownMenuItem(text = { Text("Meters") }, onClick = { /*TODO*/})
                     DropdownMenuItem(text = { Text("Feet") }, onClick = { /*TODO*/})
