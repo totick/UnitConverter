@@ -53,6 +53,18 @@ fun UnitConverter(modifier: Modifier = Modifier) {
     var inputValue by remember { mutableStateOf("") }
     var inExpanded by remember { mutableStateOf(false) }
     var outExpanded by remember { mutableStateOf(false) }
+    var inputUnit by remember { mutableStateOf("Centimeters") }
+    var outputUnit by remember { mutableStateOf("Meters") }
+
+    fun handleUnitChange(unitName: String, unitType: String){
+        if(unitType == "Input"){
+            inputUnit = unitName
+            inExpanded = false
+        }else{
+            outputUnit = unitName
+            outExpanded = false
+        }
+    }
 
     Column(modifier = modifier.fillMaxSize().padding(0.dp, 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally)
@@ -65,28 +77,28 @@ fun UnitConverter(modifier: Modifier = Modifier) {
             /* Input Box */
             Box {
                 Button(onClick = { inExpanded = true }) {
-                    Text("Select")
+                    Text(inputUnit)
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "ArrowDropDown")
                 }
                 DropdownMenu(expanded = inExpanded, onDismissRequest = { inExpanded = false }) {
-                    DropdownMenuItem(text = { Text("Centimeters") }, onClick = { /*TODO*/})
-                    DropdownMenuItem(text = { Text("Meters") }, onClick = { /*TODO*/})
-                    DropdownMenuItem(text = { Text("Feet") }, onClick = { /*TODO*/})
-                    DropdownMenuItem(text = { Text("Millimeters") }, onClick = { /*TODO*/})
+                    DropdownMenuItem(text = { Text("Centimeters") }, onClick = { handleUnitChange("Centimeters", "Input") })
+                    DropdownMenuItem(text = { Text("Meters") }, onClick = { handleUnitChange("Meters", "Input") })
+                    DropdownMenuItem(text = { Text("Feet") }, onClick = { handleUnitChange("Feet", "Input") })
+                    DropdownMenuItem(text = { Text("Millimeters") }, onClick = { handleUnitChange("Millimeters", "Input") })
                 }
             }
             Spacer(modifier = Modifier.width(16.dp))
             /* Output Box */
             Box {
                 Button(onClick = { outExpanded = true }) {
-                    Text("Select")
+                    Text(outputUnit)
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "ArrowDropDown")
                 }
                 DropdownMenu(expanded = outExpanded, onDismissRequest = { outExpanded = false }) {
-                    DropdownMenuItem(text = { Text("Centimeters") }, onClick = { /*TODO*/})
-                    DropdownMenuItem(text = { Text("Meters") }, onClick = { /*TODO*/})
-                    DropdownMenuItem(text = { Text("Feet") }, onClick = { /*TODO*/})
-                    DropdownMenuItem(text = { Text("Millimeters") }, onClick = { /*TODO*/})
+                    DropdownMenuItem(text = { Text("Centimeters") }, onClick = {handleUnitChange("Centimeters", "Output")})
+                    DropdownMenuItem(text = { Text("Meters") }, onClick = {handleUnitChange("Meters", "Output")})
+                    DropdownMenuItem(text = { Text("Feet") }, onClick = {handleUnitChange("Feet", "Output")})
+                    DropdownMenuItem(text = { Text("Millimeters") }, onClick = {handleUnitChange("Millimeters", "Output")})
                 }
             }
         }
